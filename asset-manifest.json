@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ZakDaMack/ZakDaMack.github.io/static/css/main.e6c13ad2.css",
+    "main.js": "/ZakDaMack/ZakDaMack.github.io/static/js/main.62d9139f.js",
+    "static/js/787.128fc6e9.chunk.js": "/ZakDaMack/ZakDaMack.github.io/static/js/787.128fc6e9.chunk.js",
+    "index.html": "/ZakDaMack/ZakDaMack.github.io/index.html",
+    "main.e6c13ad2.css.map": "/ZakDaMack/ZakDaMack.github.io/static/css/main.e6c13ad2.css.map",
+    "main.62d9139f.js.map": "/ZakDaMack/ZakDaMack.github.io/static/js/main.62d9139f.js.map",
+    "787.128fc6e9.chunk.js.map": "/ZakDaMack/ZakDaMack.github.io/static/js/787.128fc6e9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.62d9139f.js"
+  ]
+}
