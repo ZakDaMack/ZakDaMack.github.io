@@ -1,122 +1,69 @@
 import React from 'react';
-import Particles from 'react-particles-js';
-import Jumbotron from './Jumbotron';
+import { useSpring, animated } from '@react-spring/web'
 
-const defaultConfig = {
-    "particles": {
-      "number": {
-        "value": 90,
-        "density": {
-          "enable": true,
-          "value_area": 1000
-        }
-      },
-      "color": {
-        "value": "#ffffff"
-      },
-      "shape": {
-        "type": "polygon",
-        "stroke": {
-          "width": 0,
-          "color": "#000000"
-        },
-        "polygon": {
-          "nb_sides": 4
-        }
-      },
-      "opacity": {
-        "value": 0.5,
-        "random": false,
-        "anim": {
-          "enable": false,
-          "speed": 2,
-          "opacity_min": 0.1,
-          "sync": false
-        }
-      },
-      "size": {
-        "value": 3,
-        "random": true,
-        "anim": {
-          "enable": false,
-          "speed": 40,
-          "size_min": 0.1,
-          "sync": false
-        }
-      },
-      "line_linked": {
-        "enable": true,
-        "distance": 150,
-        "color": "#ffffff",
-        "opacity": 0.4,
-        "width": 1
-      },
-      "move": {
-        "enable": true,
-        "speed": 1,
-        "direction": "none",
-        "random": false,
-        "straight": false,
-        "out_mode": "out",
-        "bounce": false,
-        "attract": {
-          "enable": false,
-          "rotateX": 600,
-          "rotateY": 1200
-        }
-      }
-    },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": {
-        "onhover": {
-          "enable": false,
-          "mode": "repulse"
-        },
-        "onclick": {
-          "enable": true,
-          "mode": "push"
-        },
-        "resize": true
-      },
-      "modes": {
-        "grab": {
-          "distance": 400,
-          "line_linked": {
-            "opacity": 1
-          }
-        },
-        "bubble": {
-          "distance": 400,
-          "size": 40,
-          "duration": 2,
-          "opacity": 8,
-          "speed": 3
-        },
-        "repulse": {
-          "distance": 200,
-          "duration": 0.4
-        },
-        "push": {
-          "particles_nb": 4
-        },
-        "remove": {
-          "particles_nb": 2
-        }
-      }
-    },
-    "retina_detect": true
-};
+import { styled } from '@mui/material/styles';
+import { Box } from '@mui/system';
+import { Avatar, Typography } from '@mui/material';
 
-function Splash(props) {
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+
+const Jumbotron = styled(`div`)(({theme}) => ({
+  display: 'flex',
+  p: '2em',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '100vh'
+}));
+
+
+
+// @keyframes bounce { 
+//   0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+//   40% {transform: translateY(-30px);} 
+//   60% {transform: translateY(-15px);} 
+// }
+
+export default function Splash(props) {
+  const { x } = useSpring({
+    from: { x: 0 },
+    to: { x: 1 }
+  });
+
   return ( 
-    <Jumbotron id='home' background='linear-gradient(347deg, rgba(34,195,145,1) 0%, rgba(156,45,253,1) 100%)'>
-        <Particles params={props.config ?? defaultConfig} style={{position: 'absolute', height: '100%', width: '100%', top: 0, left: 0}}/>
-        <div style={{zIndex: 1}}>
-            {props.children}
-        </div>
+    <Jumbotron 
+      sx={{
+        background: `url('${props.background}')`, 
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      }}>
+
+      <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+        <Box>
+          <Typography variant="h2">{props.title}</Typography>
+          <Typography variant="subtitle">{props.subtitle}</Typography>
+        </Box>
+        <Avatar sx={{ml: 2, width: '6em', height: '6em'}} alt={props.title} src={props.avatar}>
+          {props.title.split(' ').map(w => w.charAt(0)).join('').toUpperCase()}
+        </Avatar>
+      </Box>
+
+      <animated.div style={{
+          transform: `translateY('${
+            x.to({
+              range: [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1],
+              output: [0, 0, -30, 0, -15, 0, 0]
+            })}'`
+        }}>
+        <KeyboardDoubleArrowDownIcon sx={{ fontSize: '4em' }} />
+      </animated.div>
+
+      <Box>
+        {props.links.map(l => (
+          <></>
+        ))}
+      </Box>
+
     </Jumbotron>
   );
 }
 
-export default Splash;
